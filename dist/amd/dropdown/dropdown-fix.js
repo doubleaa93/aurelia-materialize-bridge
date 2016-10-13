@@ -176,31 +176,31 @@ define(['exports'], function (exports) {
             }
           });
         } else {
-            origin.unbind('click.' + origin.attr('id'));
-            origin.bind('click.' + origin.attr('id'), function (e) {
-              if (!isFocused) {
-                if (origin[0] == e.currentTarget && !origin.hasClass('active') && $(e.target).closest('.dropdown-content').length === 0) {
-                  e.preventDefault();
-                  if (curr_options.stopPropagation) {
-                    e.stopPropagation();
-                  }
-                  placeDropdown('click');
-                } else if (origin.hasClass('active')) {
+          origin.unbind('click.' + origin.attr('id'));
+          origin.bind('click.' + origin.attr('id'), function (e) {
+            if (!isFocused) {
+              if (origin[0] == e.currentTarget && !origin.hasClass('active') && $(e.target).closest('.dropdown-content').length === 0) {
+                e.preventDefault();
+                if (curr_options.stopPropagation) {
+                  e.stopPropagation();
+                }
+                placeDropdown('click');
+              } else if (origin.hasClass('active')) {
+                  hideDropdown();
+                  $(document).unbind('click.' + activates.attr('id') + ' touchstart.' + activates.attr('id'));
+                }
+
+              if (activates.hasClass('active')) {
+                $(document).bind('click.' + activates.attr('id') + ' touchstart.' + activates.attr('id'), function (e) {
+                  if (!activates.is(e.target) && !origin.is(e.target) && !origin.find(e.target).length) {
                     hideDropdown();
                     $(document).unbind('click.' + activates.attr('id') + ' touchstart.' + activates.attr('id'));
                   }
-
-                if (activates.hasClass('active')) {
-                  $(document).bind('click.' + activates.attr('id') + ' touchstart.' + activates.attr('id'), function (e) {
-                    if (!activates.is(e.target) && !origin.is(e.target) && !origin.find(e.target).length) {
-                      hideDropdown();
-                      $(document).unbind('click.' + activates.attr('id') + ' touchstart.' + activates.attr('id'));
-                    }
-                  });
-                }
+                });
               }
-            });
-          }
+            }
+          });
+        }
         origin.on('open', function (e, eventType) {
           placeDropdown(eventType);
         });

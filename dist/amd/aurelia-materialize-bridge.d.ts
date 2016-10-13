@@ -100,6 +100,65 @@ export declare class ConfigBuilder {
   withoutGlobalResources(): ConfigBuilder;
   withScrollfirePatch(): ConfigBuilder;
 }
+export * from 'aurelia-materialize-bridge/autocomplete/autocomplete';
+export * from 'aurelia-materialize-bridge/badge/badge';
+export * from 'aurelia-materialize-bridge/box/box';
+export * from 'aurelia-materialize-bridge/breadcrumbs/breadcrumbs';
+export * from 'aurelia-materialize-bridge/breadcrumbs/instructionFilter';
+export * from 'aurelia-materialize-bridge/button/button';
+export * from 'aurelia-materialize-bridge/card/card';
+export * from 'aurelia-materialize-bridge/carousel/carousel-item';
+export * from 'aurelia-materialize-bridge/carousel/carousel';
+export * from 'aurelia-materialize-bridge/char-counter/char-counter';
+export * from 'aurelia-materialize-bridge/checkbox/checkbox';
+export * from 'aurelia-materialize-bridge/chip/chip';
+export * from 'aurelia-materialize-bridge/chip/chips';
+export * from 'aurelia-materialize-bridge/collapsible/collapsible';
+export * from 'aurelia-materialize-bridge/collection/collection-header';
+export * from 'aurelia-materialize-bridge/collection/collection-item';
+export * from 'aurelia-materialize-bridge/collection/collection';
+export * from 'aurelia-materialize-bridge/collection/md-collection-selector';
+export * from 'aurelia-materialize-bridge/colors/colorValueConverters';
+export * from 'aurelia-materialize-bridge/colors/md-colors';
+export * from 'aurelia-materialize-bridge/common/attributeManager';
+export * from 'aurelia-materialize-bridge/common/attributes';
+export * from 'aurelia-materialize-bridge/common/constants';
+export * from 'aurelia-materialize-bridge/common/events';
+export * from 'aurelia-materialize-bridge/datepicker/datepicker.default-parser';
+export * from 'aurelia-materialize-bridge/datepicker/datepicker';
+export * from 'aurelia-materialize-bridge/dropdown/dropdown-element';
+export * from 'aurelia-materialize-bridge/dropdown/dropdown';
+export * from 'aurelia-materialize-bridge/dropdown/dropdown-fix';
+export * from 'aurelia-materialize-bridge/fab/fab';
+export * from 'aurelia-materialize-bridge/file/file';
+export * from 'aurelia-materialize-bridge/footer/footer';
+export * from 'aurelia-materialize-bridge/input/input-prefix';
+export * from 'aurelia-materialize-bridge/input/input-update-service';
+export * from 'aurelia-materialize-bridge/input/input';
+export * from 'aurelia-materialize-bridge/modal/modal-trigger';
+export * from 'aurelia-materialize-bridge/navbar/navbar';
+export * from 'aurelia-materialize-bridge/pagination/pagination';
+export * from 'aurelia-materialize-bridge/parallax/parallax';
+export * from 'aurelia-materialize-bridge/progress/progress';
+export * from 'aurelia-materialize-bridge/pushpin/pushpin';
+export * from 'aurelia-materialize-bridge/radio/radio';
+export * from 'aurelia-materialize-bridge/range/range';
+export * from 'aurelia-materialize-bridge/scrollfire/scrollfire-patch';
+export * from 'aurelia-materialize-bridge/scrollfire/scrollfire-target';
+export * from 'aurelia-materialize-bridge/scrollfire/scrollfire';
+export * from 'aurelia-materialize-bridge/scrollspy/scrollspy';
+export * from 'aurelia-materialize-bridge/select/select';
+export * from 'aurelia-materialize-bridge/sidenav/sidenav-collapse';
+export * from 'aurelia-materialize-bridge/sidenav/sidenav';
+export * from 'aurelia-materialize-bridge/slider/slider';
+export * from 'aurelia-materialize-bridge/switch/switch';
+export * from 'aurelia-materialize-bridge/tabs/tabs';
+export * from 'aurelia-materialize-bridge/toast/toastService';
+export * from 'aurelia-materialize-bridge/tooltip/tooltip';
+export * from 'aurelia-materialize-bridge/transitions/fadein-image';
+export * from 'aurelia-materialize-bridge/transitions/staggered-list';
+export * from 'aurelia-materialize-bridge/validation/validationRenderer';
+export * from 'aurelia-materialize-bridge/waves/waves';
 export declare function configure(aurelia?: any, configCallback?: any): any;
 export declare class MdAutoComplete {
   input: any;
@@ -128,8 +187,6 @@ export declare class MdBreadcrumbs {
   constructor(element?: any, router?: any);
   navigate(navigationInstruction?: any): any;
 }
-
-// this.router.navigate(navigationInstruction.config.name);
 export declare class InstructionFilterValueConverter {
   toView(navigationInstructions?: any): any;
 }
@@ -143,6 +200,15 @@ export declare class MdButton {
   detached(): any;
   disabledChanged(newValue?: any): any;
   flatChanged(newValue?: any): any;
+}
+export declare class MdCard {
+  mdHorizontal: any;
+  mdImage: any;
+  mdReveal: any;
+  mdSize: any;
+  mdTitle: any;
+  constructor(element?: any);
+  attached(): any;
 }
 
 // @customElement('md-carousel-item')
@@ -160,15 +226,6 @@ export declare class MdCarousel {
   attached(): any;
   itemsChanged(newValue?: any): any;
   refresh(): any;
-}
-export declare class MdCard {
-  mdHorizontal: any;
-  mdImage: any;
-  mdReveal: any;
-  mdSize: any;
-  mdTitle: any;
-  constructor(element?: any);
-  attached(): any;
 }
 export declare class MdCharCounter {
   length: any;
@@ -202,18 +259,10 @@ export declare class MdChips {
   constructor(element?: any);
   attached(): any;
   detached(): any;
-  
-  //
   onChipAdd(e?: any, chip?: any): any;
-  
-  // fireEvent(this.element, 'change');
   onChipDelete(e?: any, chip?: any): any;
-  
-  // fireEvent(this.element, 'change');
   onChipSelect(e?: any, chip?: any): any;
 }
-
-// fireEvent(this.element, 'change');
 export declare class MdCollapsible {
   constructor(element?: any);
   attached(): any;
@@ -316,12 +365,8 @@ export declare class MdDatePicker {
   onClose(): any;
   onCalendarIconClick(event?: any): any;
   onSet(value?: any): any;
-  
-  // this.value = new Date(value.select);
   valueChanged(newValue?: any): any;
 }
-
-// });
 export declare class MdDropdownElement {
   static id: any;
   alignment: any;
@@ -349,12 +394,6 @@ export declare class MdDropdown {
   constructor(element?: any);
   attached(): any;
   detached(): any;
-}
-export declare class MdFab {
-  mdFixed: any;
-  mdLarge: any;
-  constructor(element?: any);
-  attached(): any;
 }
 export declare class MdFileInput {
   mdCaption: any;
@@ -384,6 +423,7 @@ export declare class MdInputUpdateService {
 export declare class MdInput {
   static id: any;
   mdLabel: any;
+  mdName: any;
   mdDisabled: any;
   mdPlaceholder: any;
   mdTextArea: any;
@@ -442,8 +482,6 @@ export declare class MdParallax {
   attached(): any;
   detached(): any;
 }
-
-// destroy handler not available
 export declare class MdProgress {
   mdColor: any;
   mdPixelSize: any;
@@ -466,8 +504,6 @@ export declare class MdPushpin {
   attached(): any;
   detached(): any;
 }
-
-// destroy handler not available
 export declare class MdRadio {
   static id: any;
   mdChecked: any;
@@ -477,15 +513,9 @@ export declare class MdRadio {
   mdName: any;
   mdValue: any;
   constructor(element?: any);
-  
-  // this.handleChange = this.handleChange.bind(this);
   attached(): any;
-  
-  // this.radio.checked = getBooleanFromAttributeValue(this.mdChecked);
-  // this.radio.addEventListener('change', this.handleChange);
   detached(): any;
   
-  // this.radio.removeEventListener('change', this.handleChange);
   // handleChange() {
   //   this.mdChecked = this.radio.checked;
   // }
@@ -525,8 +555,6 @@ export declare class MdScrollSpy {
   attached(): any;
   detached(): any;
 }
-
-// destroy handler not available
 export declare class MdSelect {
   disabled: any;
   label: any;
@@ -549,31 +577,24 @@ export declare class MdSelect {
   observeVisibleDropdownContent(attach?: any): any;
   handleBlur(): any;
 }
+export declare class MdSwitch {
+  mdChecked: any;
+  mdDisabled: any;
+  mdLabelOff: any;
+  mdLabelOn: any;
+  constructor(element?: any);
+  attached(): any;
+  detached(): any;
+  handleChange(): any;
+  blur(): any;
+  mdCheckedChanged(newValue?: any): any;
+}
 export declare class MdSidenavCollapse {
   ref: any;
   constructor(element?: any, observerLocator?: any);
   attached(): any;
   detached(): any;
 }
-
-// this.widthSubscription.unsubscribe();
-// fixedChanged() {
-//   this.log.debug('fixedChanged');
-//   $(this.element).sideNav({
-//     edge: this.ref.edge || 'left',
-//     closeOnClick: this.ref.closeOnClick,
-//     menuWidth: parseInt(this.ref.mdWidth, 10)
-//   });
-// }
-//
-// widthChanged() {
-//   this.log.debug('widthChanged');
-//   $(this.element).sideNav({
-//     edge: this.ref.edge || 'left',
-//     closeOnClick: this.ref.closeOnClick,
-//     menuWidth: parseInt(this.ref.mdWidth, 10)
-//   });
-// }
 export declare class MdSidenav {
   static id: any;
   mdCloseOnClick: any;
@@ -587,53 +608,21 @@ export declare class MdSidenav {
   detached(): any;
   mdFixedChanged(newValue?: any): any;
 }
-export declare class MdSlider {
-  mdFillContainer: any;
-  mdHeight: any;
-  mdIndicators: any;
-  mdInterval: any;
-  mdTransition: any;
-  constructor(element?: any);
-  attached(): any;
-  pause(): any;
-  start(): any;
-  next(): any;
-  prev(): any;
-  refresh(): any;
-  mdIndicatorsChanged(): any;
-}
-
-// commented since that leads to strange effects
-// mdIntervalChanged() {
-//   this.refresh();
-// }
-//
-// mdTransitionChanged() {
-//   this.refresh();
-// }
-export declare class MdSwitch {
-  mdChecked: any;
-  mdDisabled: any;
-  mdLabelOff: any;
-  mdLabelOn: any;
-  constructor(element?: any);
-  attached(): any;
-  detached(): any;
-  handleChange(): any;
-  blur(): any;
-  mdCheckedChanged(newValue?: any): any;
-}
 export declare class MdTabs {
   constructor(element?: any, taskQueue?: any);
   attached(): any;
-  
-  // });
   detached(): any;
   fireTabSelectedEvent(e?: any): any;
   selectTab(id?: any): any;
   
   // FIXME: probably bad
   selectedTab: any;
+}
+export declare class MdFab {
+  mdFixed: any;
+  mdLarge: any;
+  constructor(element?: any);
+  attached(): any;
 }
 export declare class MdToastService {
   show(message?: any, displayLength?: any, className?: any): any;
@@ -649,6 +638,21 @@ export declare class MdTooltip {
   detached(): any;
   textChanged(): any;
   initTooltip(): any;
+}
+export declare class MdSlider {
+  mdFillContainer: any;
+  mdHeight: any;
+  mdIndicators: any;
+  mdInterval: any;
+  mdTransition: any;
+  constructor(element?: any);
+  attached(): any;
+  pause(): any;
+  start(): any;
+  next(): any;
+  prev(): any;
+  refresh(): any;
+  mdIndicatorsChanged(): any;
 }
 export declare class MdFadeinImage {
   ref: any;

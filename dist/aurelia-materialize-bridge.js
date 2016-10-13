@@ -301,6 +301,66 @@ export class ConfigBuilder {
   }
 }
 
+export * from './autocomplete/autocomplete';
+export * from './badge/badge';
+export * from './box/box';
+export * from './breadcrumbs/breadcrumbs';
+export * from './breadcrumbs/instructionFilter';
+export * from './button/button';
+export * from './card/card';
+export * from './carousel/carousel-item';
+export * from './carousel/carousel';
+export * from './char-counter/char-counter';
+export * from './checkbox/checkbox';
+export * from './chip/chip';
+export * from './chip/chips';
+export * from './collapsible/collapsible';
+export * from './collection/collection-header';
+export * from './collection/collection-item';
+export * from './collection/collection';
+export * from './collection/md-collection-selector';
+export * from './colors/colorValueConverters';
+export * from './colors/md-colors';
+export * from './common/attributeManager';
+export * from './common/attributes';
+export * from './common/constants';
+export * from './common/events';
+export * from './datepicker/datepicker.default-parser';
+export * from './datepicker/datepicker';
+export * from './dropdown/dropdown-element';
+export * from './dropdown/dropdown';
+export * from './dropdown/dropdown-fix';
+export * from './fab/fab';
+export * from './file/file';
+export * from './footer/footer';
+export * from './input/input-prefix';
+export * from './input/input-update-service';
+export * from './input/input';
+export * from './modal/modal-trigger';
+export * from './navbar/navbar';
+export * from './pagination/pagination';
+export * from './parallax/parallax';
+export * from './progress/progress';
+export * from './pushpin/pushpin';
+export * from './radio/radio';
+export * from './range/range';
+export * from './scrollfire/scrollfire-patch';
+export * from './scrollfire/scrollfire-target';
+export * from './scrollfire/scrollfire';
+export * from './scrollspy/scrollspy';
+export * from './select/select';
+export * from './sidenav/sidenav-collapse';
+export * from './sidenav/sidenav';
+export * from './slider/slider';
+export * from './switch/switch';
+export * from './tabs/tabs';
+export * from './toast/toastService';
+export * from './tooltip/tooltip';
+export * from './transitions/fadein-image';
+export * from './transitions/staggered-list';
+export * from './validation/validationRenderer';
+export * from './waves/waves';
+
 function applyPolyfills() {
   polyfillElementClosest();
 }
@@ -513,6 +573,35 @@ export class MdButton {
   }
 }
 
+@customElement('md-card')
+@inject(Element)
+export class MdCard {
+  @bindable({
+    defaultBindingMode: bindingMode.oneTime
+  }) mdHorizontal;
+  @bindable({
+    defaultBindingMode: bindingMode.oneTime
+  }) mdImage = null;
+  @bindable({
+    defaultBindingMode: bindingMode.oneTime
+  }) mdReveal = false;
+  @bindable({
+    defaultBindingMode: bindingMode.oneWay
+  }) mdSize = '';
+  @bindable({
+    defaultBindingMode: bindingMode.oneTime
+  }) mdTitle;
+
+  constructor(element) {
+    this.element = element;
+  }
+
+  attached() {
+    this.mdHorizontal = getBooleanFromAttributeValue(this.mdHorizontal);
+    this.mdReveal = getBooleanFromAttributeValue(this.mdReveal);
+  }
+}
+
 // @customElement('md-carousel-item')
 @inject(Element)
 export class MdCarouselItem {
@@ -573,35 +662,6 @@ export class MdCarousel {
         $(this.element).carousel(options);
       });
     }
-  }
-}
-
-@customElement('md-card')
-@inject(Element)
-export class MdCard {
-  @bindable({
-    defaultBindingMode: bindingMode.oneTime
-  }) mdHorizontal;
-  @bindable({
-    defaultBindingMode: bindingMode.oneTime
-  }) mdImage = null;
-  @bindable({
-    defaultBindingMode: bindingMode.oneTime
-  }) mdReveal = false;
-  @bindable({
-    defaultBindingMode: bindingMode.oneWay
-  }) mdSize = '';
-  @bindable({
-    defaultBindingMode: bindingMode.oneTime
-  }) mdTitle;
-
-  constructor(element) {
-    this.element = element;
-  }
-
-  attached() {
-    this.mdHorizontal = getBooleanFromAttributeValue(this.mdHorizontal);
-    this.mdReveal = getBooleanFromAttributeValue(this.mdReveal);
   }
 }
 
@@ -1588,22 +1648,6 @@ export class MdDropdown {
   }
 }
 
-@customElement('md-fab')
-@inject(Element)
-export class MdFab {
-  @bindable() mdFixed = false;
-  @bindable() mdLarge = false;
-
-  constructor(element) {
-    this.element = element;
-  }
-
-  attached() {
-    this.mdFixed = getBooleanFromAttributeValue(this.mdFixed);
-    this.mdLarge = getBooleanFromAttributeValue(this.mdLarge);
-  }
-}
-
 @customElement('md-file')
 @inject(Element)
 export class MdFileInput {
@@ -1705,6 +1749,7 @@ export class MdInput {
   static id = 0;
 
   @bindable() mdLabel = '';
+  @bindable() mdName = '';
   @bindable() mdDisabled = false;
   @bindable({
     defaultBindingMode: bindingMode.oneTime
@@ -2368,6 +2413,49 @@ export class MdSelect {
   }
 }
 
+@customElement('md-switch')
+@inject(Element)
+export class MdSwitch {
+  @bindable({
+    defaultBindingMode: bindingMode.twoWay
+  }) mdChecked;
+  @bindable() mdDisabled;
+  @bindable() mdLabelOff = 'Off';
+  @bindable() mdLabelOn = 'On';
+
+  constructor(element) {
+    this.element = element;
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  attached() {
+    this.checkbox.checked = getBooleanFromAttributeValue(this.mdChecked);
+    if (getBooleanFromAttributeValue(this.mdDisabled)) {
+      this.checkbox.disabled = true;
+    }
+    this.checkbox.addEventListener('change', this.handleChange);
+  }
+
+  detached() {
+    this.checkbox.removeEventListener('change', this.handleChange);
+  }
+
+  handleChange() {
+    this.mdChecked = this.checkbox.checked;
+    fireEvent(this.element, 'blur');
+  }
+
+  blur() {
+    fireEvent(this.element, 'blur');
+  }
+
+  mdCheckedChanged(newValue) {
+    if (this.checkbox) {
+      this.checkbox.checked = !!newValue;
+    }
+  }
+}
+
 @customAttribute('md-sidenav-collapse')
 @inject(Element, ObserverLocator)
 export class MdSidenavCollapse {
@@ -2466,119 +2554,6 @@ export class MdSidenav {
   }
 }
 
-@customElement('md-slider')
-@inject(Element)
-@inlineView(`
-  <template class="slider">
-  <require from="./slider.css"></require>
-  <ul class="slides">
-    <slot></slot>
-  </ul>
-  </template>
-`)
-export class MdSlider {
-  @bindable({ defaultBindingMode: bindingMode.oneTime }) mdFillContainer = false;
-  @bindable({ defaultBindingMode: bindingMode.oneTime }) mdHeight = 400;
-  @bindable() mdIndicators = true;
-  @bindable({ defaultBindingMode: bindingMode.oneTime }) mdInterval = 6000;
-  @bindable({ defaultBindingMode: bindingMode.oneTime }) mdTransition = 500;
-
-  constructor(element) {
-    this.element = element;
-    this.log = getLogger('md-slider');
-  }
-
-  attached() {
-    if (getBooleanFromAttributeValue(this.mdFillContainer)) {
-      this.element.classList.add('fullscreen');
-    }
-    this.refresh();
-  }
-
-  pause() {
-    $(this.element).slider('pause');
-  }
-
-  start() {
-    $(this.element).slider('start');
-  }
-
-  next() {
-    $(this.element).slider('next');
-  }
-
-  prev() {
-    $(this.element).slider('prev');
-  }
-
-  refresh() {
-    let options = {
-      height: parseInt(this.mdHeight, 10),
-      indicators: getBooleanFromAttributeValue(this.mdIndicators),
-      interval: parseInt(this.mdInterval, 10),
-      transition: parseInt(this.mdTransition, 10)
-    };
-    this.log.debug('refreshing slider, params:', options);
-    $(this.element).slider(options);
-  }
-
-  mdIndicatorsChanged() {
-    this.refresh();
-  }
-
-  // commented since that leads to strange effects
-  // mdIntervalChanged() {
-  //   this.refresh();
-  // }
-  //
-  // mdTransitionChanged() {
-  //   this.refresh();
-  // }
-}
-
-@customElement('md-switch')
-@inject(Element)
-export class MdSwitch {
-  @bindable({
-    defaultBindingMode: bindingMode.twoWay
-  }) mdChecked;
-  @bindable() mdDisabled;
-  @bindable() mdLabelOff = 'Off';
-  @bindable() mdLabelOn = 'On';
-
-  constructor(element) {
-    this.element = element;
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  attached() {
-    this.checkbox.checked = getBooleanFromAttributeValue(this.mdChecked);
-    if (getBooleanFromAttributeValue(this.mdDisabled)) {
-      this.checkbox.disabled = true;
-    }
-    this.checkbox.addEventListener('change', this.handleChange);
-  }
-
-  detached() {
-    this.checkbox.removeEventListener('change', this.handleChange);
-  }
-
-  handleChange() {
-    this.mdChecked = this.checkbox.checked;
-    fireEvent(this.element, 'blur');
-  }
-
-  blur() {
-    fireEvent(this.element, 'blur');
-  }
-
-  mdCheckedChanged(newValue) {
-    if (this.checkbox) {
-      this.checkbox.checked = !!newValue;
-    }
-  }
-}
-
 @customAttribute('md-tabs')
 @inject(Element, TaskQueue)
 export class MdTabs {
@@ -2661,6 +2636,22 @@ export class MdTabs {
   }
 }
 
+@customElement('md-fab')
+@inject(Element)
+export class MdFab {
+  @bindable() mdFixed = false;
+  @bindable() mdLarge = false;
+
+  constructor(element) {
+    this.element = element;
+  }
+
+  attached() {
+    this.mdFixed = getBooleanFromAttributeValue(this.mdFixed);
+    this.mdLarge = getBooleanFromAttributeValue(this.mdLarge);
+  }
+}
+
 export class MdToastService {
   show(message, displayLength, className?) {
     return new Promise((resolve, reject) => {
@@ -2712,6 +2703,76 @@ export class MdTooltip {
       html: this.html
     });
   }
+}
+
+@customElement('md-slider')
+@inject(Element)
+@inlineView(`
+  <template class="slider">
+  <require from="./slider.css"></require>
+  <ul class="slides">
+    <slot></slot>
+  </ul>
+  </template>
+`)
+export class MdSlider {
+  @bindable({ defaultBindingMode: bindingMode.oneTime }) mdFillContainer = false;
+  @bindable({ defaultBindingMode: bindingMode.oneTime }) mdHeight = 400;
+  @bindable() mdIndicators = true;
+  @bindable({ defaultBindingMode: bindingMode.oneTime }) mdInterval = 6000;
+  @bindable({ defaultBindingMode: bindingMode.oneTime }) mdTransition = 500;
+
+  constructor(element) {
+    this.element = element;
+    this.log = getLogger('md-slider');
+  }
+
+  attached() {
+    if (getBooleanFromAttributeValue(this.mdFillContainer)) {
+      this.element.classList.add('fullscreen');
+    }
+    this.refresh();
+  }
+
+  pause() {
+    $(this.element).slider('pause');
+  }
+
+  start() {
+    $(this.element).slider('start');
+  }
+
+  next() {
+    $(this.element).slider('next');
+  }
+
+  prev() {
+    $(this.element).slider('prev');
+  }
+
+  refresh() {
+    let options = {
+      height: parseInt(this.mdHeight, 10),
+      indicators: getBooleanFromAttributeValue(this.mdIndicators),
+      interval: parseInt(this.mdInterval, 10),
+      transition: parseInt(this.mdTransition, 10)
+    };
+    this.log.debug('refreshing slider, params:', options);
+    $(this.element).slider(options);
+  }
+
+  mdIndicatorsChanged() {
+    this.refresh();
+  }
+
+  // commented since that leads to strange effects
+  // mdIntervalChanged() {
+  //   this.refresh();
+  // }
+  //
+  // mdTransitionChanged() {
+  //   this.refresh();
+  // }
 }
 
 @customAttribute('md-fadein-image')
